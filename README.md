@@ -1,137 +1,93 @@
-# 🌐 NetScope — Local Network Service Reporter
+# NetScope — Local Network Service Reporter
 
-**NetScope** is a Flask-based local network scanning and service reporting tool. It uses **Nmap** to discover hosts, detect open ports and identify available network services, then presents the results through a simple web interface.
+**Created by Kumaresh**
 
-## ✨ Features
+NetScope is a lightweight Flask-based network service reporting application. It uses Nmap to scan an authorized local or private-network target and presents discovered hosts, ports, protocols, services, and versions in a simple web interface.
 
-- 🔍 Local network / host scanning with Nmap
-- 📡 Open port and service detection
-- 📊 Web-based scan results
-- 📄 PDF report generation
-- 🧾 XML report generation
-- 📥 Report download support
-- 🗄️ Local database support for scan/report data
-- 📱 Responsive dark-themed interface
+## Features
 
-## 🛠️ Technologies Used
+- Local network service scanning with Nmap
+- Host and service information
+- TCP and UDP service summary
+- Scan duration and statistics
+- Scan history
+- HTML, PDF, and XML report generation
+- Defensive security recommendations
+- Clean web-based interface
 
-- **Python**
-- **Flask**
-- **Nmap**
-- **HTML5 / CSS3**
-- **SQLite**
-- **ReportLab / XML reporting**
+## Nmap
 
-## 📁 Project Structure
+NetScope uses **Nmap (Network Mapper)** for network discovery and service detection.
+
+The application processes Nmap scan results and displays them in a readable format. Some scan features may require elevated privileges; when necessary, the application can use a TCP service-scan fallback.
+
+> Only scan systems and networks that you own or have explicit permission to test.
+
+## Project Structure
 
 ```text
 NetScope/
-│
-├── app.py                  # Main Flask application
-├── database.py             # Database operations
-├── email_report.py         # Email/report functionality
-├── pdf_report.py           # PDF report generation
-├── xml_report.py           # XML report generation
-├── recommendations.py      # Service/security recommendations
-├── scanner_test.py         # Scanner testing
-├── requirements.txt        # Required Python packages
-├── netscope.db             # Local database
-├── README.md               # Project documentation
-│
+├── app.py
+├── database.py
+├── requirements.txt
 ├── scanner/
-│   └── ...                 # Nmap scanning modules
-│
-├── templates/
-│   └── ...                 # HTML pages
-│
-├── static/
-│   └── style.css           # Website styling
-│
+│   ├── __init__.py
+│   └── ...
 ├── reports/
-│   └── ...                 # Generated reports
-│
-└── docs/
-    └── ...                 # Project screenshots / documentation
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── results.html
+│   └── history.html
+└── static/
+    └── style.css
 ```
 
-## 🔎 Nmap
+## Requirements
 
-NetScope uses **Nmap (Network Mapper)** as its scanning engine.
+- Python 3
+- Flask
+- Nmap
+- Python packages listed in `requirements.txt`
 
-Nmap is responsible for discovering hosts, checking ports and identifying services running on the target system.
-
-NetScope sends the required scan request to Nmap, processes the returned information and displays the results in the web interface.
-
-> ⚠️ Use NetScope and Nmap only on systems and networks you own or have permission to test.
-
-## 🚀 Installation
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/Paramasivam23/netscope-reporter.git
-cd netscope-reporter
-```
-
-### 2. Install Python dependencies
+## Setup
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Make sure Nmap is installed
+Make sure Nmap is installed and available on your system.
 
-Install Nmap on your system and make sure the `nmap` command is available from the terminal.
-
-Check with:
-
-```bash
-nmap --version
-```
-
-### 4. Run NetScope
+## Run
 
 ```bash
 python app.py
 ```
 
-Open the local address shown in the terminal, usually:
+Open:
 
 ```text
 http://127.0.0.1:5000
 ```
 
-## 📊 Reports
+## Usage
 
-NetScope can generate scan reports in different formats, including:
+1. Open the Scanner page.
+2. Enter an authorized target address.
+3. Start the scan.
+4. Review detected hosts and services.
+5. Open Scan History for previous scans.
+6. Download the generated reports when required.
 
-- PDF
-- XML
+## Reports
 
-Generated reports are stored in the project's `reports/` directory.
+NetScope supports:
 
-## 🖼️ Screenshots
-
-Project screenshots are maintained inside the `docs/` directory.
-
-The screenshots demonstrate the main interface, scanning workflow and generated results/reports.
-
-## 📌 Project Status
-
-**Status: Completed / Working**
-
-The implemented application supports network scanning, service detection, web-based result display and report generation.
-
-## 🔗 GitHub Repository
-
-**NetScope — Local Network Service Reporter**
-
-https://github.com/Paramasivam23/netscope-reporter
-
-## 👨‍💻 Author
-
-**Paramasivam m**
+- HTML reports
+- PDF reports
+- XML reports
 
 ---
 
-> **Note:** NetScope is intended for authorized network testing and educational purposes only.
+**NetScope — Local Network Service Reporter**  
+**Created by Kumaresh**
