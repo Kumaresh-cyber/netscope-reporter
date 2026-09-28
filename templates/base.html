@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>NetScope</title>
 
   <link
@@ -13,41 +14,103 @@
 
 <body>
 
-  <header>
-    <div class="brand">NetScope</div>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
 
-    <nav>
-      <a href="{{ url_for('index') }}">Scanner</a>
-      <a href="{{ url_for('history') }}">History</a>
-    </nav>
+    <div class="logo-area">
+      <div class="logo-icon">N</div>
 
-    <div class="user-info">
-      <div class="avatar">K</div>
       <div>
-        <strong>Kumaresh</strong>
-        <span>Administrator</span>
+        <div class="logo-name">NetScope</div>
+        <div class="logo-sub">Network Monitor</div>
       </div>
     </div>
-  </header>
 
-  <main>
+    <div class="menu-title">NAVIGATION</div>
 
-    {% with messages = get_flashed_messages() %}
-      {% for message in messages %}
-        <div class="alert">
-          {{ message }}
+    <nav class="side-nav">
+
+      <a class="nav-item" href="{{ url_for('index') }}">
+        <span class="nav-icon">⌂</span>
+        <span>Scanner</span>
+      </a>
+
+      <a class="nav-item" href="{{ url_for('history') }}">
+        <span class="nav-icon">◷</span>
+        <span>Scan History</span>
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <div class="status-dot"></div>
+
+      <div>
+        <div class="status-text">System Ready</div>
+        <div class="status-small">Local scanner active</div>
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN PAGE -->
+  <div class="page">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+
+      <div>
+        <div class="page-label">NETWORK SECURITY</div>
+        <h1>Local Network Scanner</h1>
+      </div>
+
+      <div class="user-card">
+
+        <div class="user-avatar">K</div>
+
+        <div>
+          <div class="user-name">Kumaresh</div>
+          <div class="user-role">Administrator</div>
         </div>
-      {% endfor %}
-    {% endwith %}
 
-    {% block content %}
-    {% endblock %}
+      </div>
 
-  </main>
+    </header>
 
-  <footer>
-    NetScope · Created by Kumaresh
-  </footer>
+
+    <!-- CONTENT -->
+    <main class="content">
+
+      {% with messages = get_flashed_messages() %}
+
+        {% for message in messages %}
+
+          <div class="alert">
+            {{ message }}
+          </div>
+
+        {% endfor %}
+
+      {% endwith %}
+
+
+      {% block content %}
+      {% endblock %}
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span>NetScope</span>
+      <span>•</span>
+      <span>Created by Kumaresh</span>
+    </footer>
+
+  </div>
 
 </body>
 </html>
