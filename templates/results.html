@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+    <p class="eyebrow">SCAN COMPLETE</p>
+
+    <h1>Network overview.</h1>
+
+    <p>
+        Scan results for
+        <strong>{{ target }}</strong>
+    </p>
+</section>
+
+
+<div class="stats">
+
+    <div>
+        <strong>{{ result.hosts|length }}</strong>
+        <span>Hosts Found</span>
+    </div>
+
+    <div>
+        <strong>{{ result.services|length }}</strong>
+        <span>Services</span>
+    </div>
+
+    <div>
+        <strong>{{ result.services|selectattr("protocol", "equalto", "TCP")|list|length }}</strong>
+        <span>TCP Services</span>
+    </div>
+
+    <div>
+        <strong>{{ result.services|selectattr("protocol", "equalto", "UDP")|list|length }}</strong>
+        <span>UDP Services</span>
+    </div>
+
+    <div>
+        <strong>{{ "%.2f"|format(duration) }}s</strong>
+        <span>Scan Time</span>
+    </div>
+
+</div>
+
+
+{% if result.scan_note %}
+<div class="alert">
+    Some Nmap features required elevated privileges.
+    A TCP service-scan fallback was used.
+</div>
+{% endif %}
+
+
+{% for host in result.hosts %}
+
+<section class="card">
+
+    <div class="scan-heading">
+        <span class="scan-number">HOST</span>
+
+        <div>
+            <h2>{{ host.address }}</h2>
+            <p class="muted">
+                {{ host.hostname or "Hostname not available" }}
+            </p>
+        </div>
+    </div>
+
+    <div class="info-grid">
+
+        <div class="info-box">
+            <strong>ADDRESS</strong>
+            <span>{{ host.address }}</span>
+        </div>
+
+        <div class="info-box">
+            <strong>STATE</strong>
+            <span>{{ host.state }}</span>
+        </div>
+
+        <div class="info-box">
+            <strong>OS</strong>
+            <span>{{ host.os }}</span>
+        </div>
+
+    </div>
+
+</section>
+
+{% endfor %}
+
+
+<section class="card">
+
+    <h2>Detected Services</h2>
+
+    <p class="muted">
+        Open ports and services discovered during the scan.
+    </p>
+
+    <table>
+
+        <tr>
+            <th>Port</th>
+            <th>Protocol</th>
+            <th>State</th>
+            <th>Service</th>
+            <th>Version</th>
+        </tr>
+
+        {% for item in result.services %}
+
+        <tr>
+            <td>{{ item.port }}</td>
+            <td>{{ item.protocol }}</td>
+            <td>{{ item.state }}</td>
+            <td>{{ item.name }}</td>
+
+            <td>
+                {{ (item.product ~ " " ~ item.version ~ " " ~ item.extrainfo).strip() or "Not reported" }}
+            </td>
+        </tr>
+
+        {% else %}
+
+        <tr>
+            <td colspan="5">No open services reported.</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</section>
+
+
+<section class="card">
+
+    <h2>Security Recommendations</h2>
+
+    <p class="muted">
+        Review the following recommendations based on the detected services.
+    </p>
+
+    <ul>
+        {% for tip in tips %}
+        <li>{{ tip }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="report-actions">
+
+        <a class="button"
+           href="{{ url_for('reports', filename=report_file) }}">
+            HTML Report
+        </a>
+
+        <a class="button"
+           href="{{ url_for('reports', filename=pdf_report_file) }}">
+            PDF Report
+        </a>
+
+        <a class="button"
+           href="{{ url_for('reports', filename=xml_report_file) }}">
+            XML Report
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

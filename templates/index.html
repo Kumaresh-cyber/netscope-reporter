@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+    <p class="eyebrow">NETWORK INSPECTION</p>
+
+    <h1>Monitor your local network.</h1>
+
+    <p>
+        Enter an authorized target to discover active network
+        services and generate a detailed scan report.
+    </p>
+</section>
+
+<section class="card scan-panel">
+
+    <div class="scan-heading">
+        <span class="scan-number">01</span>
+
+        <div>
+            <h2>Start a new scan</h2>
+            <p class="muted">
+                Enter the IP address or hostname you want to inspect.
+            </p>
+        </div>
+    </div>
+
+    <form method="post">
+
+        <label for="target">Target address</label>
+
+        <div class="scan-input">
+            <input
+                id="target"
+                name="target"
+                placeholder="127.0.0.1"
+                required
+            >
+
+            <button type="submit">
+                Scan Network
+            </button>
+        </div>
+
+        <p class="hint">
+            Only scan localhost or private systems that you are
+            authorized to test.
+        </p>
+
+    </form>
+
+</section>
+
+<section class="info-grid">
+
+    <div class="info-box">
+        <strong>NMAP</strong>
+        <span>Service discovery</span>
+    </div>
+
+    <div class="info-box">
+        <strong>REPORTS</strong>
+        <span>Structured results</span>
+    </div>
+
+    <div class="info-box">
+        <strong>LOCAL</strong>
+        <span>Private network focused</span>
+    </div>
+
+</section>
+
+{% endblock %}
